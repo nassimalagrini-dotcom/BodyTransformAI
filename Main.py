@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Main Premium Dark Theme
+# 2. Styles (Native Button Styling)
 st.markdown("""
     <style>
     /* Deep Black Background */
@@ -16,19 +16,16 @@ st.markdown("""
         color: white;
     }
 
-    /* Hide default Streamlit elements for a cleaner look */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    /* Hide default header/footer */
     header {visibility: hidden;}
+    footer {visibility: hidden;}
 
-    /* Hero Section Titles */
+    /* Hero Text */
     .hero-title {
         text-align: center; 
         font-size: 65px; 
         font-weight: 900; 
         margin-top: 40px;
-        margin-bottom: 5px;
-        letter-spacing: 2px;
         color: white;
     }
     .hero-subtitle {
@@ -39,42 +36,28 @@ st.markdown("""
         color: white;
     }
 
-    /* --- THE CENTERED PULSE BUTTON --- */
-    .button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin: 50px 0;
+    /* --- PULSE BUTTON CSS FOR ST.BUTTON --- */
+    div.stButton > button {
+        width: 280px !important;
+        height: 280px !important;
+        border: 2px solid white !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        color: white !important;
+        font-size: 18px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        display: block !important;
+        margin: 0 auto !important;
+        animation: pulse-ring 2.2s infinite !important;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    .pulse-button {
-        width: 260px;
-        height: 260px;
-        border: 2px solid white;
-        border-radius: 50%;
-        background: transparent;
-        color: white !important;      /* Forces text to white */
-        text-decoration: none !important; /* Removes blue underline */
-        font-size: 18px;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-        text-transform: uppercase;
-        animation: pulse-ring 2.2s infinite;
-        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-family: 'Inter', sans-serif;
-    }
-
-    .pulse-button:hover {
-        background: white;
+    div.stButton > button:hover {
+        background: white !important;
         color: black !important;
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
-        text-decoration: none !important;
-        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.6) !important;
+        transform: scale(1.05) !important;
     }
 
     @keyframes pulse-ring {
@@ -83,33 +66,13 @@ st.markdown("""
         100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
-    /* --- FEATURE CARDS --- */
+    /* Feature Cards */
     .feature-card {
         background-color: #0d0d0d;
         border: 1px solid #222;
         border-radius: 25px;
         padding: 40px;
         text-align: center;
-        min-height: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: 0.3s;
-    }
-
-    .feature-card:hover {
-        border-color: #444;
-        background-color: #151515;
-    }
-
-    .feature-text {
-        color: #b7e4c7 !important;
-        font-weight: 800;
-        margin-top: 15px;
-        font-size: 14px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -118,40 +81,17 @@ st.markdown("""
 st.markdown('<h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>', unsafe_allow_html=True)
 st.markdown('<p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p>', unsafe_allow_html=True)
 
-# 4. THE CENTERED BUTTON
-# Using HTML for the link to ensure it stays centered and follows our styling
-st.markdown("""
-    <div class="button-container">
-        <a href="/1_Onboarding" target="_self" class="pulse-button">
-            START YOUR<br>TRANSFORMATION
-        </a>
-    </div>
-""", unsafe_allow_html=True)
+# 4. THE FUNCTIONAL BUTTON
+# This native Streamlit button triggers the multipage sidebar
+if st.button("START YOUR\nTRANSFORMATION"):
+    st.switch_page("pages/1_Onboarding.py")
 
 # 5. BOTTOM CARDS SECTION
 st.write("<br><br>", unsafe_allow_html=True)
-c1, c3 = st.columns(2)
+col1, col2 = st.columns(2)
 
-with c1:
-    st.markdown("""
-        <div class="feature-card">
-            <h1 style="font-size: 50px; margin:0;">🍎</h1>
-            <p class="feature-text">PERSONALISED<br>MEAL PLANS</p>
-        </div>
-    """, unsafe_allow_html=True)
+with col1:
+    st.markdown('<div class="feature-card"><h1 style="font-size: 50px;">🍎</h1><p style="color:#b7e4c7; font-weight:800;">PERSONALISED MEAL PLANS</p></div>', unsafe_allow_html=True)
 
-
-with c3:
-    st.markdown("""
-        <div class="feature-card">
-            <h1 style="font-size: 50px; margin:0;">❤️</h1>
-            <p class="feature-text">MINDSET &<br>SUPPORT</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-# Social Proof Footer
-st.markdown("""
-    <p style='text-align: center; margin-top: 60px; opacity: 0.4; font-size: 14px;'>
-        Join thousands of success stories!
-    </p>
-""", unsafe_allow_html=True)
+with col2:
+    st.markdown('<div class="feature-card"><h1 style="font-size: 50px;">❤️</h1><p style="color:#b7e4c7; font-weight:800;">MINDSET & SUPPORT</p></div>', unsafe_allow_html=True)
