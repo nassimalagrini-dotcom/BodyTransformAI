@@ -122,7 +122,7 @@ st.markdown('<p class="hero-subtitle">Transform Your Life, One Healthy Step at a
 # Using HTML for the link to ensure it stays centered and follows our styling
 st.markdown("""
     <div class="button-container">
-        <a href="/Onboarding" target="_self" class="pulse-button">
+        <a href="/1_Onboarding" target="_self" class="pulse-button">
             START YOUR<br>TRANSFORMATION
         </a>
     </div>
