@@ -8,18 +8,43 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Premium CSS
+# 2. Premium CSS for Centering & Styling
 st.markdown("""
     <style>
+    /* Background and Sidebar */
     .stApp { background-color: #000000; color: white; }
     [data-testid="stSidebar"], [data-testid="stSidebarNav"] {display: none;}
     header, footer {visibility: hidden;}
 
-    .hero-container { text-align: center; width: 100%; }
-    .hero-title { font-size: 65px; font-weight: 900; margin-top: 40px; color: white; }
-    .hero-subtitle { font-size: 20px; opacity: 0.7; margin-bottom: 40px; color: white; }
+    /* --- THE HERO CENTERING --- */
+    .hero-container {
+        text-align: center;
+        width: 100%;
+        margin-top: 5vh;
+    }
+    .hero-title { 
+        font-size: 65px; 
+        font-weight: 900; 
+        margin-bottom: 0px; 
+        color: white; 
+    }
+    .hero-subtitle { 
+        font-size: 20px; 
+        opacity: 0.7; 
+        color: white; 
+        margin-top: 5px;
+    }
 
-    /* Centering the button text inside the circle */
+    /* --- THE BUTTON CENTERING --- */
+    div.stButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    /* Styling the actual Button into a Circle */
     div.stButton > button {
         width: 280px !important;
         height: 280px !important;
@@ -32,14 +57,14 @@ st.markdown("""
         text-transform: uppercase !important;
         animation: pulse-ring 2.2s infinite !important;
         transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        margin: auto !important;
-        display: block !important;
+        line-height: 1.2 !important;
     }
 
     div.stButton > button:hover {
         background: white !important;
         color: black !important;
         box-shadow: 0 0 50px rgba(255, 255, 255, 0.6) !important;
+        transform: scale(1.05) !important;
     }
 
     @keyframes pulse-ring {
@@ -48,6 +73,7 @@ st.markdown("""
         100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
+    /* Feature Cards */
     .feature-card {
         background-color: #0d0d0d;
         border: 1px solid #222;
@@ -58,17 +84,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. HERO SECTION
-st.markdown('<div class="hero-container"><h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>', unsafe_allow_html=True)
-st.markdown('<p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p></div>', unsafe_allow_html=True)
+# 3. HERO SECTION (Title & Subtitle Centered)
+st.markdown("""
+    <div class="hero-container">
+        <h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>
+        <p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p>
+    </div>
+""", unsafe_allow_html=True)
 
-# 4. THE CENTERED BUTTON (The Column Trick)
-# We create 3 columns. The middle one (col2) is where the button lives.
-col1, col2, col3 = st.columns([1, 1, 1]) 
-
-with col2:
-    if st.button("START YOUR\nTRANSFORMATION"):
-        st.switch_page("pages/1_Onboarding.py")
+# 4. THE CENTERED BUTTON
+if st.button("START YOUR\nTRANSFORMATION"):
+    st.switch_page("pages/1_Onboarding.py")
 
 # 5. BOTTOM CARDS SECTION
 st.write("<br><br>", unsafe_allow_html=True)
