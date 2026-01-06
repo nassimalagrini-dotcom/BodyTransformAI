@@ -1,15 +1,30 @@
 import streamlit as st
 import uuid
-from styles import apply_premium_theme
-# Add this at the top of 1_Onboarding.py
+import os
+import pandas as pd
+from datetime import datetime
+
+# 1. Page Config - This brings the sidebar back once they enter the onboarding
+st.set_page_config(
+    page_title="Join BodyTransform AI", 
+    page_icon="💪",
+    initial_sidebar_state="expanded"
+)
+
+# --- NAVIGATION & THEME ---
+# Custom CSS to make sure the sidebar is visible on this page
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] { display: flex !important; }
+    [data-testid="stSidebarNav"] { display: flex !important; }
+    </style>
+""", unsafe_allow_html=True)
+
+# "Back to Home" Button at the very top
 if st.button("⬅️ Back to Home"):
     st.switch_page("Main.py")
 
-st.write("---") # Adds a divider line
-
-# 1. Page Config
-st.set_page_config(page_title="Join BodyTransform AI", page_icon="💪")
-apply_premium_theme()
+st.write("---")
 
 st.title("🚀 Start Your Transformation")
 
@@ -32,7 +47,7 @@ if not st.session_state['user_name']:
         else:
             st.warning("Please enter your name.")
 
-# --- STEP 2: FULL DETAILS (This is where your SyntaxError was) ---
+# --- STEP 2: FULL DETAILS ---
 else:
     st.success(f"Welcome, {st.session_state['user_name']}! (ID: {st.session_state['client_id']})")
 
@@ -52,7 +67,7 @@ else:
                 final_weight = input_weight
             else:
                 weight_lbs = st.number_input("Weight (lbs)", min_value=70.0, max_value=600.0, value=155.0)
-                final_weight = weight_lbs * 0.453592  # Converts to kg for the calculator
+                final_weight = weight_lbs * 0.453592  # Converts to kg
 
         with col2:
             # Height Conversion Logic
@@ -63,7 +78,7 @@ else:
                 f_col, i_col = st.columns(2)
                 feet = f_col.number_input("Feet", min_value=3, max_value=8, value=5)
                 inches = i_col.number_input("Inches", min_value=0, max_value=11, value=7)
-                final_height = (feet * 30.48) + (inches * 2.54)  # Converts to cm for the calculator
+                final_height = (feet * 30.48) + (inches * 2.54)  # Converts to cm
 
             activity = st.selectbox("Activity Level",
                                     ["Mostly Sitting", "Light Movement", "Active Job", "Very Athletic"])
@@ -73,7 +88,7 @@ else:
         diet_choice = st.selectbox("Dietary Preference", ["Normal", "Vegan", "Halal", "Intermittent Fasting"])
 
         if st.form_submit_button("GENERATE MY PLAN 🥗"):
-            # Save converted values so the Diet Plan page logic doesn't break
+            # Update session state
             st.session_state.update({
                 "weight": final_weight,
                 "height": final_height,
@@ -85,9 +100,11 @@ else:
                 "unit_pref": unit_system,
                 "onboarding_complete": True
             })
+            
+            # Switch to Diet Plan
             st.switch_page("pages/2_Diet_Plan.py")
 
-    # Reset button to go back to Name Step if needed
+    # Reset button to go back to Name Step
     if st.button("Edit Name"):
         st.session_state['user_name'] = ""
         st.rerun()
