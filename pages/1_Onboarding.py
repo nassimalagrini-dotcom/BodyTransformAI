@@ -1,6 +1,11 @@
 import streamlit as st
 import uuid
 from styles import apply_premium_theme
+# Add this at the top of 1_Onboarding.py
+if st.button("⬅️ Back to Home"):
+    st.switch_page("Main.py")
+
+st.write("---") # Adds a divider line
 
 # 1. Page Config
 st.set_page_config(page_title="Join BodyTransform AI", page_icon="💪")
