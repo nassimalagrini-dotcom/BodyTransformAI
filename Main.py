@@ -16,20 +16,24 @@ st.markdown("""
     [data-testid="stSidebar"], [data-testid="stSidebarNav"] {display: none;}
     header, footer {visibility: hidden;}
 
-    /* Centering the Title and Subtitle */
-    .hero-text { text-align: center; width: 100%; }
+    /* Hero Text Centering */
+    .hero-container {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
     .hero-title { font-size: 65px; font-weight: 900; margin-top: 40px; color: white; }
     .hero-subtitle { font-size: 20px; opacity: 0.7; margin-bottom: 40px; color: white; }
 
-    /* --- PERFECT CENTERING FOR THE BUTTON --- */
-    .stButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 30px;
+    /* --- THE ULTIMATE CENTERING WRAPPER --- */
+    .button-wrapper {
+        display: grid;
+        place-items: center; /* This centers horizontally AND vertically */
+        width: 100%;
+        margin: 40px 0;
     }
 
-    /* Styling the actual Streamlit button to be the Pulse Circle */
+    /* Styling the actual Streamlit button */
     div.stButton > button {
         width: 280px !important;
         height: 280px !important;
@@ -40,7 +44,6 @@ st.markdown("""
         font-size: 18px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
-        line-height: 1.2 !important;
         animation: pulse-ring 2.2s infinite !important;
         transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -70,13 +73,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 3. HERO SECTION
-st.markdown('<div class="hero-text"><h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>', unsafe_allow_html=True)
+st.markdown('<div class="hero-container"><h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>', unsafe_allow_html=True)
 st.markdown('<p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p></div>', unsafe_allow_html=True)
 
 # 4. THE CENTERED BUTTON
-# No columns needed - the CSS above centers the st.button automatically
+# We wrap the button in our custom 'button-wrapper' class
+st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
 if st.button("START YOUR\nTRANSFORMATION"):
     st.switch_page("pages/1_Onboarding.py")
+st.markdown('</div>', unsafe_allow_html=True)
 
 # 5. BOTTOM CARDS SECTION
 st.write("<br><br>", unsafe_allow_html=True)
