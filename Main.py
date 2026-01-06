@@ -8,43 +8,50 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Premium CSS for Centering & Styling
+# 2. Premium CSS for Total Centering
 st.markdown("""
     <style>
-    /* Background and Sidebar */
+    /* Background and Global Settings */
     .stApp { background-color: #000000; color: white; }
     [data-testid="stSidebar"], [data-testid="stSidebarNav"] {display: none;}
     header, footer {visibility: hidden;}
 
-    /* --- THE HERO CENTERING --- */
+    /* --- HERO & SUBTITLE CENTERING --- */
     .hero-container {
         text-align: center;
         width: 100%;
         margin-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     .hero-title { 
         font-size: 65px; 
         font-weight: 900; 
-        margin-bottom: 0px; 
+        margin-bottom: 10px; 
         color: white; 
+        width: 100%;
     }
     .hero-subtitle { 
         font-size: 20px; 
-        opacity: 0.7; 
+        opacity: 0.8; 
         color: white; 
-        margin-top: 5px;
+        margin-bottom: 40px;
+        width: 100%;
     }
 
-    /* --- THE BUTTON CENTERING --- */
+    /* --- THE BUTTON CENTERING FIX --- */
+    /* Forces the Streamlit button container to the center */
     div.stButton {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin-top: 40px;
+        margin: 20px 0;
     }
 
-    /* Styling the actual Button into a Circle */
+    /* Styling the Button into the Pulse Circle */
     div.stButton > button {
         width: 280px !important;
         height: 280px !important;
@@ -57,7 +64,10 @@ st.markdown("""
         text-transform: uppercase !important;
         animation: pulse-ring 2.2s infinite !important;
         transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        line-height: 1.2 !important;
+        line-height: 1.4 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     div.stButton > button:hover {
@@ -73,7 +83,7 @@ st.markdown("""
         100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
-    /* Feature Cards */
+    /* Feature Cards Section */
     .feature-card {
         background-color: #0d0d0d;
         border: 1px solid #222;
@@ -84,7 +94,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. HERO SECTION (Title & Subtitle Centered)
+# 3. CENTERED HERO SECTION
 st.markdown("""
     <div class="hero-container">
         <h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>
@@ -93,6 +103,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 4. THE CENTERED BUTTON
+# The CSS above ensures st.button is automatically centered
 if st.button("START YOUR\nTRANSFORMATION"):
     st.switch_page("pages/1_Onboarding.py")
 
