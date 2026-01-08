@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Premium CSS for Total Centering
+# 2. Premium CSS
 st.markdown("""
     <style>
     /* Background and Global Settings */
@@ -16,65 +16,63 @@ st.markdown("""
     [data-testid="stSidebar"], [data-testid="stSidebarNav"] {display: none;}
     header, footer {visibility: hidden;}
 
-    /* --- HERO & SUBTITLE CENTERING --- */
-    .hero-container {
-        text-align: center;
-        width: 100%;
-        margin-top: 5vh;
+    /* --- TOTAL CENTERING CONTAINER --- */
+    .main-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
-    .hero-title { 
-        font-size: 65px; 
-        font-weight: 900; 
-        margin-bottom: 10px; 
-        color: white; 
+        text-align: center;
         width: 100%;
+    }
+
+    .hero-title { 
+        font-size: 60px; 
+        font-weight: 900; 
+        margin-top: 40px;
+        color: white; 
     }
     .hero-subtitle { 
-        font-size: 20px; 
-        opacity: 0.8; 
+        font-size: 18px; 
+        opacity: 0.7; 
         color: white; 
-        margin-bottom: 40px;
-        width: 100%;
+        margin-bottom: 50px;
     }
 
-    /* --- THE BUTTON CENTERING FIX --- */
-    /* Forces the Streamlit button container to the center */
-    div.stButton {
+    /* --- THE NEW CENTERED PULSE BUTTON --- */
+    .btn-container {
         display: flex;
         justify-content: center;
-        align-items: center;
         width: 100%;
-        margin: 20px 0;
+        margin: 40px 0;
     }
 
-    /* Styling the Button into the Pulse Circle */
-    div.stButton > button {
-        width: 280px !important;
-        height: 280px !important;
-        border: 2px solid white !important;
-        border-radius: 50% !important;
-        background: transparent !important;
+    .custom-pulse-button {
+        width: 250px;
+        height: 250px;
+        border: 2px solid white;
+        border-radius: 50%;
+        background: transparent;
         color: white !important;
-        font-size: 18px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        animation: pulse-ring 2.2s infinite !important;
-        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        line-height: 1.4 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+        text-decoration: none !important;
+        font-size: 16px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: pulse-ring 2.2s infinite;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
     }
 
-    div.stButton > button:hover {
-        background: white !important;
+    .custom-pulse-button:hover {
+        background: white;
         color: black !important;
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.6) !important;
-        transform: scale(1.05) !important;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+        transform: scale(1.05);
     }
 
     @keyframes pulse-ring {
@@ -83,12 +81,12 @@ st.markdown("""
         100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
-    /* Feature Cards Section */
+    /* Feature Cards */
     .feature-card {
         background-color: #0d0d0d;
         border: 1px solid #222;
-        border-radius: 25px;
-        padding: 40px;
+        border-radius: 20px;
+        padding: 30px;
         text-align: center;
     }
     </style>
@@ -96,21 +94,26 @@ st.markdown("""
 
 # 3. CENTERED HERO SECTION
 st.markdown("""
-    <div class="hero-container">
+    <div class="main-wrapper">
         <h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>
         <p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p>
     </div>
 """, unsafe_allow_html=True)
 
-# 4. THE CENTERED BUTTON
-# The CSS above ensures st.button is automatically centered
-if st.button("START YOUR\nTRANSFORMATION"):
-    st.switch_page("pages/1_Onboarding.py")
+# 4. THE CENTERED BUTTON (HTML Version for Perfect Alignment)
+# Note: On Streamlit Cloud, the path is simply /1_Onboarding
+st.markdown("""
+    <div class="btn-container">
+        <a href="/1_Onboarding" target="_self" class="custom-pulse-button">
+            START YOUR<br>TRANSFORMATION
+        </a>
+    </div>
+""", unsafe_allow_html=True)
 
 # 5. BOTTOM CARDS SECTION
 st.write("<br><br>", unsafe_allow_html=True)
 c1, c2 = st.columns(2)
 with c1:
-    st.markdown('<div class="feature-card"><h1 style="font-size: 50px;">🍎</h1><p style="color:#b7e4c7; font-weight:800;">PERSONALISED MEAL PLANS</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="feature-card"><h1>🍎</h1><p style="color:#b7e4c7; font-weight:800;">PERSONALISED MEAL PLANS</p></div>', unsafe_allow_html=True)
 with c2:
-    st.markdown('<div class="feature-card"><h1 style="font-size: 50px;">❤️</h1><p style="color:#b7e4c7; font-weight:800;">MINDSET & SUPPORT</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="feature-card"><h1>❤️</h1><p style="color:#b7e4c7; font-weight:800;">MINDSET & SUPPORT</p></div>', unsafe_allow_html=True)
