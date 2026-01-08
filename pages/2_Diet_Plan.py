@@ -195,7 +195,7 @@ with st.expander("🛒 Generate My Weekly Shopping List"):
         st.write("- Olive Oil, Avocado, Mixed Nuts")
 
 # Replace your current PayPal button code with this:
-url = "https://www.paypal.me/Bodytransformation"
+url = "https://www.paypal.me/BodytransformationIA"
 
 st.markdown(f"""
     <div style="display: flex; justify-content: center;">
