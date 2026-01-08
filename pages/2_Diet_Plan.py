@@ -194,23 +194,27 @@ with st.expander("🛒 Generate My Weekly Shopping List"):
         st.markdown("**🥑 Healthy Fats**")
         st.write("- Olive Oil, Avocado, Mixed Nuts")
 
-# --- 9. PREMIUM UPSELL & PAYPAL ---
-st.write("<br>", unsafe_allow_html=True)
+# Replace your current PayPal button code with this:
+url = "https://www.paypal.me/Bodytransformation"
+
 st.markdown(f"""
-    <div class="sale-box">
-        <h2 style="color: #ffffff; margin-bottom: 5px;">🔥 UNLOCK PREMIUM DASHBOARD</h2>
-        <p style="color: #00d4ff; font-weight: bold;">ONLY $3.99 • ONE-TIME PAYMENT</p>
-        <p style="color: white; font-size: 14px;">Unlock advanced weight tracking and your full 30-day journey.</p>
+    <div style="display: flex; justify-content: center;">
+        <a href="{url}" target="_blank">
+            <button style="
+                background-color: #ffc439; 
+                color: black; 
+                padding: 15px 35px; 
+                border: none; 
+                border-radius: 25px; 
+                font-weight: bold; 
+                font-size: 18px; 
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                Pay with PayPal 💳
+            </button>
+        </a>
     </div>
 """, unsafe_allow_html=True)
-
-paypal_url = f"https://www.paypal.me/BodytransformationIA/3.99?item_name=Premium_Activation_{client_id}"
-
-col_pay_1, col_pay_2, col_pay_3 = st.columns([1, 2, 1])
-with col_pay_2:
-    if st.button("💳 PAY WITH PAYPAL", use_container_width=True, type="primary"):
-        st.markdown(f'<meta http-equiv="refresh" content="0;url={paypal_url}">', unsafe_allow_html=True)
-
 # --- 10. ACCESS CODE CHECKER & SUPPORT ---
 st.write("---")
 col_lock, col_supp = st.columns([2, 1])
