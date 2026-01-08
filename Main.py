@@ -11,12 +11,11 @@ st.set_page_config(
 # 2. Premium CSS
 st.markdown("""
     <style>
-    /* Background and Global Settings */
     .stApp { background-color: #000000; color: white; }
     [data-testid="stSidebar"], [data-testid="stSidebarNav"] {display: none;}
     header, footer {visibility: hidden;}
 
-    /* --- TOTAL CENTERING CONTAINER --- */
+    /* TOTAL CENTERING FOR EVERYTHING */
     .main-wrapper {
         display: flex;
         flex-direction: column;
@@ -29,50 +28,44 @@ st.markdown("""
     .hero-title { 
         font-size: 60px; 
         font-weight: 900; 
-        margin-top: 40px;
+        margin-top: 60px;
         color: white; 
+        text-align: center;
     }
     .hero-subtitle { 
         font-size: 18px; 
         opacity: 0.7; 
         color: white; 
-        margin-bottom: 50px;
+        margin-bottom: 40px;
+        text-align: center;
     }
 
-    /* --- THE NEW CENTERED PULSE BUTTON --- */
-    .btn-container {
+    /* THE BUTTON CENTERING */
+    div.stButton {
         display: flex;
         justify-content: center;
         width: 100%;
-        margin: 40px 0;
     }
 
-    .custom-pulse-button {
-        width: 250px;
-        height: 250px;
-        border: 2px solid white;
-        border-radius: 50%;
-        background: transparent;
+    div.stButton > button {
+        width: 280px !important;
+        height: 280px !important;
+        border: 2px solid white !important;
+        border-radius: 50% !important;
+        background: transparent !important;
         color: white !important;
-        text-decoration: none !important;
-        font-size: 16px;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        animation: pulse-ring 2.2s infinite;
-        transition: 0.3s ease-in-out;
-        cursor: pointer;
+        font-size: 18px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        animation: pulse-ring 2.2s infinite !important;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        line-height: 1.4 !important;
     }
 
-    .custom-pulse-button:hover {
-        background: white;
+    div.stButton > button:hover {
+        background: white !important;
         color: black !important;
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.6) !important;
     }
 
     @keyframes pulse-ring {
@@ -81,36 +74,25 @@ st.markdown("""
         100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
-    /* Feature Cards */
     .feature-card {
         background-color: #0d0d0d;
         border: 1px solid #222;
         border-radius: 20px;
-        padding: 30px;
+        padding: 40px;
         text-align: center;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. CENTERED HERO SECTION
-st.markdown("""
-    <div class="main-wrapper">
-        <h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>
-        <p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p>
-    </div>
-""", unsafe_allow_html=True)
+# 3. CENTERED HERO
+st.markdown('<h1 class="hero-title">WELCOME TO YOUR JOURNEY</h1>', unsafe_allow_html=True)
+st.markdown('<p class="hero-subtitle">Transform Your Life, One Healthy Step at a Time.</p>', unsafe_allow_html=True)
 
-# 4. THE CENTERED BUTTON (HTML Version for Perfect Alignment)
-# Note: On Streamlit Cloud, the path is simply /1_Onboarding
-st.markdown("""
-    <div class="btn-container">
-        <a href="/1_Onboarding" target="_self" class="custom-pulse-button">
-            START YOUR<br>TRANSFORMATION
-        </a>
-    </div>
-""", unsafe_allow_html=True)
+# 4. THE CENTERED BUTTON (Native Streamlit with forced CSS centering)
+if st.button("START YOUR\nTRANSFORMATION"):
+    st.switch_page("pages/1_Onboarding.py")
 
-# 5. BOTTOM CARDS SECTION
+# 5. BOTTOM CARDS
 st.write("<br><br>", unsafe_allow_html=True)
 c1, c2 = st.columns(2)
 with c1:
